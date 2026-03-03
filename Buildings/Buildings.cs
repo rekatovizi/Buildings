@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Buildings
+﻿namespace Buildings
 {
-    public class Building
+    public abstract class Building
     {
         // ==== Private adattagok ====
         private BuildingType type;
@@ -35,31 +29,37 @@ namespace Buildings
 
         // ==== Public property-k ====
 
-        public BuildingType Type { get => type; set => type = value; }
+        public BuildingType Type { get => type; protected set => type = value; }
         public string Name { get => name; set => name = value; }
         public int X { get => x; set => x = value; }
         public int Y { get => y; set => y = value; }
-        public decimal BuildingCost { get => buildingCost; set => buildingCost = value; }
-        public decimal MaintenanceCost { get => maintenanceCost; set => maintenanceCost = value; }
-        public int TaxIncome { get => taxIncome; set => taxIncome = value; }
-        public int MaxHealth { get => maxHealth; set => maxHealth = value; }
+        public decimal BuildingCost { get => buildingCost; protected set => buildingCost = value; }
+        public decimal MaintenanceCost { get => maintenanceCost; protected set => maintenanceCost = value; }
+        public int TaxIncome { get => taxIncome; protected set => taxIncome = value; }
+        public int MaxHealth { get => maxHealth; protected set => maxHealth = value; }
         public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
         public bool IsPowered { get => isPowered; set => isPowered = value; }
         public bool IsConnectedToWater { get => isConnectedToWater; set => isConnectedToWater = value; }
-        public int Capacity { get => capacity; set => capacity = value; }
+        public int Capacity { get => capacity; protected set => capacity = value; }
         public int CurrentOccupancy { get => currentOccupancy; set => currentOccupancy = value; }
-        public int HappinessImpact { get => happinessImpact; set => happinessImpact = value; }
-        public int ElectricityConsumption { get => electricityConsumption; set => electricityConsumption = value; }
-        public int WaterConsumption { get => waterConsumption; set => waterConsumption = value; }
+        public int HappinessImpact { get => happinessImpact; protected set => happinessImpact = value; }
+        public int ElectricityConsumption { get => electricityConsumption; protected set => electricityConsumption = value; }
+        public int WaterConsumption { get => waterConsumption; protected set => waterConsumption = value; }
 
-        /// <summary>
-        /// Adds a building to the supplied collection if it does not conflict with an existing building.
-        /// Conflicts are checked by reference and by coordinate (X,Y).
-        /// </summary>
-        /// <param name="collection">Target collection to add into.</param>
-        /// <param name="building">Building to add.</param>
-        /// <returns>True if added; false if a conflict prevented adding.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when collection or building is null.</exception>
+        // ==== Konstruktor ====
+        protected Building(string name, int x, int y)
+        {
+            Name = name;
+            X = x;
+            Y = y;
+            CurrentHealth = MaxHealth;
+        }
+
+        // ==== Példa virtuális metódus ====
+        public virtual decimal CalculateNetIncome()
+        {
+            return TaxIncome - MaintenanceCost;
+        }
         public static bool Add(ICollection<Building> collection, Building building)
         {
             if (collection is null)
@@ -88,14 +88,6 @@ namespace Buildings
             return true;
         }
 
-        /// <summary>
-        /// Deletes a building from the supplied collection.
-        /// Attempts to remove by reference first, then by matching Name and coordinates.
-        /// </summary>
-        /// <param name="collection">Collection to remove from.</param>
-        /// <param name="building">Building to remove or a building with matching identity.</param>
-        /// <returns>True if a building was removed; otherwise false.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when collection or building is null.</exception>
         public static bool Delete(ICollection<Building> collection, Building building)
         {
             if (collection is null)
