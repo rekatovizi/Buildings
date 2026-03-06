@@ -90,10 +90,7 @@
                 throw new ArgumentNullException(nameof(collection));
             }
 
-            if (building is null)
-            {
-                throw new ArgumentNullException(nameof(building));
-            }
+
 
             // Try remove by reference
             if (collection.Remove(building))
