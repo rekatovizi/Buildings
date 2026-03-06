@@ -67,11 +67,6 @@
                 throw new ArgumentNullException(nameof(collection));
             }
 
-            if (building is null)
-            {
-                throw new ArgumentNullException(nameof(building));
-            }
-
             // Prevent adding the exact same reference twice
             if (collection.Contains(building))
             {
