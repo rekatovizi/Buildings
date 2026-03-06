@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Buildings
 {
-	internal class CommercialBuilding
+	internal class CommercialBuilding : Building
 	{
+		public CommercialBuilding(string name, int x, int y) : base(name, x, y)
+		{
+		}
 	}
 }

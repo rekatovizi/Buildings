@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Buildings
 {
-	internal class UtilityBuilding
+	internal class UtilityBuilding : Building
 	{
+		public UtilityBuilding(string name, int x, int y) : base(name, x, y)
+		{
+		}
 	}
 }
