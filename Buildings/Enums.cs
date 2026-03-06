@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace Buildings
 {
+    public enum BuildingType
+    {
+        Residential,
+        Industrial,
+        Commercial,
+        Service,
+        Utility
+    }
     public enum Residential
     {
         House,
