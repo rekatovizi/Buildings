@@ -6,12 +6,68 @@ using System.Threading.Tasks;
 
 namespace Buildings
 {
-    public enum BuildingType
+    public enum Residential
     {
-        Residential,
-        Industrial,
-        Commercial,
-        Service,
-        Utility
+        House,
+        Apartment,
+        ApartmentBlock,
+        Villa,
+        Townhouse,
+        Dormitory,
+        StudentHousing,
+        RetirementHome,
+        Hotel
+    }
+
+    public enum Industrial
+    {
+        Factory,
+        Warehouse,
+        Workshop,
+        PowerPlant,
+        OilRefinery,
+        SteelMill,
+        LogisticsCenter,
+        RecyclingPlant
+    }
+
+    public enum Commercial
+    {
+        Shop,
+        Supermarket,
+        ShoppingMall,
+        Restaurant,
+        Cafe,
+        OfficeBuilding,
+        Bank,
+        Cinema,
+        Hotel
+    }
+
+    public enum Service
+    {
+        School,
+        University,
+        Hospital,
+        PoliceStation,
+        FireStation,
+        PostOffice,
+        Library,
+        CityHall,
+        Court,
+        Uszoda
+    }
+
+    public enum Utility
+    {
+        WaterTower,
+        WaterTreatmentPlant,
+        SewagePlant,
+        PowerSubstation,
+        WindTurbine,
+        SolarPlant,
+        GasStation,
+        WasteProcessing,
+        Landfill
     }
 }
