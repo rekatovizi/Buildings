@@ -10,6 +10,15 @@ namespace Buildings
 	{
 		public IndustrialBuilding(string name, int x, int y) : base(name, x, y)
 		{
+			Type = BuildingType.Industrial;
+			BuildingCost = 20000;
+			MaintenanceCost = 1500;
+			TaxIncome = 2000;
+			Capacity = 100;
+			MaxHealth = 100;
+			HappinessImpact = -5;
+			ElectricityConsumption = 50;
+			WaterConsumption = 50;
 		}
 	}
 }
