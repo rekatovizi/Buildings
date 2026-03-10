@@ -9,7 +9,7 @@
 		public void Menu()
 		{
 			
-			Console.WriteLine("Válassz az alábbiak kökzül\n\t1. Residential Building\n\t2. Commertial Building\n\t3. Industrial Building\n\t4. Service\n\t5. Utility\n\t6. Back.");
+			Console.WriteLine("Válassz az alábbiak közül\n\t1. Residential Building\n\t2. Commertial Building\n\t3. Industrial Building\n\t4. Service\n\t5. Utility\n\t6. Back.");
 			int x = int.Parse(Console.ReadLine());
 			Console.WriteLine("-------------------------------------------");
 
@@ -57,6 +57,7 @@
 		}
 		public void zetenyMiatt(Type type) //Szabó Zétény miatt van ez a metódus, hogy ne kelljen minden switch case-ben ugyanazt a kódot írni
 		{
+			Console.WriteLine("-------------------------------------------");
 			int input = int.Parse(Console.ReadLine());
 			Console.WriteLine($"Kiválasztottad a {Enum.GetName(type, input - 1)} épületet.");
 			Console.WriteLine("Melyik X és Y értékre szeretnéd ülteti: ");
