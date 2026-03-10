@@ -1,11 +1,11 @@
-Building csoprt munka
+Building csoport munka
 Felosztás: 
 Réka: 
 Vince: 
 Viktor: 
 Márk: 
 
-1)Core Building Architecture (Alaprendszer)
+1) Core Building Architecture (Alaprendszer)
   Feladata: az egész épületrendszer alapja.
   Ő írja:
   Building abstract class
@@ -13,7 +13,7 @@ Márk:
   közös metódusok
   alap validációk  
 
-2)Lakossági és szolgáltató épületek
+2) Lakossági és szolgáltató épületek
 Ő csinálja:
 Residential
 ResidentialBuilding
@@ -38,7 +38,7 @@ RoomCount
 Ő implementálhat:
 override CalculateEffect()
 
-3)Gazdasági és ipari épületek
+3) Gazdasági és ipari épületek
 Ő készíti:
 Industrial
 IndustrialBuilding
@@ -58,7 +58,7 @@ EnergyProduction
 FuelConsumption
 
 
-4)Building Management rendszer
+4) Building Management rendszer
 Ő írja a logikát ami az épületeket kezeli.
 BuildingManager / BuildingService
 Feladata:
