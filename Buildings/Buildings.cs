@@ -1,8 +1,11 @@
-﻿namespace Buildings
+﻿using System.Runtime.CompilerServices;
+
+namespace Buildings
 {
     public abstract class Building
     {
         // ==== Private adattagok ====
+        private static List<Building> buildings = new List<Building>();
         private BuildingType type;
         private string name;
 
@@ -60,56 +63,86 @@
         {
             return TaxIncome - MaintenanceCost;
         }
-        public static bool Add(ICollection<Building> collection, Building building)
+
+
+        public static bool Add(Building building)
         {
-            if (collection is null)
+            // Ha már van ugyanazon a koordinátán épület → nem adjuk hozzá
+            foreach (var b in buildings)
             {
-                throw new ArgumentNullException(nameof(collection));
+                if (b.X == building.X && b.Y == building.Y)
+                {
+                    return false;
+                }
             }
 
-            // Prevent adding the exact same reference twice
-            if (collection.Contains(building))
-            {
-                return false;
-            }
-
-            // Prevent adding a building at coordinates already occupied
-            if (collection.OfType<Building>().Any(b => b.X == building.X && b.Y == building.Y))
-            {
-                return false;
-            }
-
-            collection.Add(building);
+            buildings.Add(building);
             return true;
         }
 
-        public static bool Delete(ICollection<Building> collection, Building building)
+        // ==== Remove metódus ====
+        public static bool Remove(Building building)
         {
-            if (collection is null)
+            if (building == null)
+                return false;
+
+            for (int i = 0; i < buildings.Count; i++)
             {
-                throw new ArgumentNullException(nameof(collection));
-            }
-
-
-
-            // Try remove by reference
-            if (collection.Remove(building))
-            {
-                return true;
-            }
-
-            // Fallback: find by Name and coordinates and remove the first match
-            var match = collection.FirstOrDefault(b =>
-                string.Equals(b.Name, building.Name, StringComparison.Ordinal) &&
-                b.X == building.X &&
-                b.Y == building.Y);
-
-            if (match is not null)
-            {
-                return collection.Remove(match);
+                if (buildings[i].X == building.X && buildings[i].Y == building.Y)
+                {
+                    buildings.RemoveAt(i);
+                    return true;
+                }
             }
 
             return false;
+        }
+
+        public static void Draw()
+        {
+            // Meghatározzuk a pálya méretét
+            int maxX = 0;
+            int maxY = 0;
+
+            for (int i = 0; i < buildings.Count; i++)
+            {
+                if (buildings[i].X > maxX)
+                    maxX = buildings[i].X;
+
+                if (buildings[i].Y > maxY)
+                    maxY = buildings[i].Y;
+            }
+
+            // Mátrix létrehozása
+            Building[,] matrix = new Building[maxX + 1, maxY + 1];
+
+            // Feltöltés
+            for (int i = 0; i < buildings.Count; i++)
+            {
+                Building b = buildings[i];
+                matrix[b.X, b.Y] = b;
+            }
+
+            // Kirajzolás
+            for (int y = 0; y <= maxY; y++)
+            {
+                for (int x = 0; x <= maxX; x++)
+                {
+                    if (matrix[x, y] != null)
+                        Console.Write("B ");
+                    else
+                        Console.Write(". ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public static void Kiiratas()
+        {
+            for (int i = 0; i < buildings.Count; i++)
+            {
+                Console.WriteLine(buildings[i].name);
+            }
         }
     }
 }
