@@ -126,15 +126,21 @@ namespace Buildings
             // Kirajzolás
             for (int y = 0; y <= maxY; y++)
             {
+                
                 for (int x = 0; x <= maxX; x++)
                 {
                     if (matrix[x, y] != null)
-                        Console.Write("B ");
+                        Console.Write($"|{"Ház ",10}|");
                     else
-                        Console.Write(". ");
+                        Console.Write($"{"  ",10}");
                 }
                 Console.WriteLine();
+                for (int x = 0; x <= maxX; x++)
+                {
+                    Console.Write($"{"--------", 10}");
+                }
             }
+            Console.WriteLine();
         }
 
         public static void Kiiratas()
