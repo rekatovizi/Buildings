@@ -11,7 +11,7 @@
 			{
 
 
-				Console.WriteLine("Válassz az alábbiak közül\n\t1. Residential Building\n\t2. Commercial Building\n\t3. Industrial Building\n\t4. Service\n\t5. Utility\n\t6. Kiírás\n\t7. Kilépés");
+				Console.WriteLine("Válassz az alábbiak közül\n\t1. Residential Building\n\t2. Commercial Building\n\t3. Industrial Building\n\t4. Service\n\t5. Utility\n\t6. Kilépés");
 				x = int.Parse(Console.ReadLine());
 				Console.WriteLine("-------------------------------------------");
 
@@ -53,22 +53,17 @@
 						zetenyMiatt(typeof(Utility));
 						break;
 					case 6:
-						//foreach (KeyValuePair<string, Building> kvp in buildingsBuilt)
-						//{
-						//	Console.WriteLine(kvp.Value);
-						//}
-							Console.Clear();
-							Draw();
-							break;
-					case 7:
 						Console.WriteLine("Vissza a főmenüre");
 						break;
 				}
-			} while (x != 7);
+			} while (x != 6);
 		}
 
-		public void zetenyMiatt(Type type) //Szabó Zétény miatt van ez a metódus, hogy ne kelljen minden switch case-ben ugyanazt a kódot írni
+
+		public void zetenyMiatt(Type type)
+
 		{
+			Building b;
 			Console.WriteLine("-------------------------------------------");
 			int input = int.Parse(Console.ReadLine());
 			Console.WriteLine($"Kiválasztottad a {Enum.GetName(type, input - 1)} épületet.");
@@ -89,14 +84,30 @@
 			}
 			else if (type == typeof(Service))
 			{
-				buildingsBuilt.Add($"Service_{buildingsBuilt.Count + 1}", new ServiceBuilding(Enum.GetName(type, input - 1), (Service)Enum.Parse(type, Enum.GetName(type, input - 1)), XPosition, YPosition));
+				switch ((Service)(input - 1))
+				{
+					case Service.School: b = new SchoolBuilding(XPosition, YPosition); break;
+					case Service.University: b = new UniversityBuilding(XPosition, YPosition); break;
+					case Service.Hospital: b = new Hospital(XPosition, YPosition); break;
+					case Service.PoliceStation: b = new PoliceStationBuilding(XPosition, YPosition); break;
+					case Service.FireStation: b = new FireStationBuilding(XPosition, YPosition); break;
+					case Service.PostOffice: b = new PostOfficeBuilding(XPosition, YPosition); break;
+					case Service.Library: b = new LibraryBuilding(XPosition, YPosition); break;
+					case Service.CityHall: b = new CityHallBuilding(XPosition, YPosition); break;
+					case Service.Court: b = new CourtBuilding(XPosition, YPosition); break;
+					case Service.Uszoda: b = new UszodaBuilding(XPosition, YPosition); break;
+					default: b = new ServiceBuilding(Enum.GetName(type, input - 1), (Service)Enum.Parse(type, Enum.GetName(type, input - 1)), XPosition, YPosition); break;
+				}
+				buildingsBuilt.Add($"Service_{buildingsBuilt.Count + 1}", b);
 			}
+
 			else if (type == typeof(Utility))
 			{
 				buildingsBuilt.Add($"Utility_{buildingsBuilt.Count + 1}", new UtilityBuilding(Enum.GetName(type, input - 1), (Utility)Enum.Parse(type, Enum.GetName(type, input - 1)), XPosition, YPosition));
 			}
 			Console.WriteLine("Sikerült :D");
 		}
+
 		public static void Draw()
 		{
 			List<Building> buildings = new List<Building>();
@@ -146,8 +157,8 @@
 				{
 					if (matrix[x - 1, y - 1] != null)
 					{
-						Console.Write($" |{matrix[x - 1,y - 1].Name,10}| ");
-						
+						Console.Write($" |{matrix[x - 1, y - 1].Name,10}| ");
+
 					}
 					else
 					{
@@ -163,6 +174,14 @@
 				Console.WriteLine();
 			}
 			Console.WriteLine();
+		}
+		public static void Kiiratas()
+		{
+			foreach (KeyValuePair<string, Building> kvp in buildingsBuilt)
+			{
+				Console.Write($"{kvp.Key}: ");
+				Console.WriteLine(kvp.Value);
+			}
 		}
 	}
 }
