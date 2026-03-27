@@ -17,7 +17,6 @@ namespace Buildings
     public enum Residential
     {
         House,
-        Apartment,
         ApartmentBlock,
         Villa,
         Townhouse,
@@ -48,8 +47,7 @@ namespace Buildings
         Cafe,
         OfficeBuilding,
         Bank,
-        Cinema,
-        Hotel
+        Cinema
     }
 
     public enum Service

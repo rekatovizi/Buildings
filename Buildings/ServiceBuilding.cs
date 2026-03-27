@@ -8,7 +8,7 @@ namespace Buildings
 {
 	internal class ServiceBuilding : Building
 	{
-		public ServiceBuilding(string name, int x, int y) : base(name, x, y)
+		public ServiceBuilding(string name, Service type,int x, int y) : base(name, x, y)
 		{
 			Type = BuildingType.Service;
 			BuildingCost = 15000;
