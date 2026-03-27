@@ -2,7 +2,46 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+		static void Main(string[] args)
+		{
+			BuildingManager manager = new BuildingManager();
+
+			bool running = true;
+
+			while (running)
+			{
+				Console.WriteLine("\n==== CITY BUILDER ====");
+				Console.WriteLine("1. Épület építés");
+				Console.WriteLine("2. Térkép megjelenítés");
+				Console.WriteLine("3. Épületek listázása");
+				Console.WriteLine("4. Kilépés");
+				int choice = int.Parse(Console.ReadLine());
+
+				switch (choice)
+				{
+					case 1:
+						manager.Menu();
+						break;
+
+					case 2:
+						Building.Draw();
+						break;
+
+					case 3:
+						Building.Kiiratas();
+						break;
+
+					case 4:
+						running = false;
+						break;
+
+					default:
+						Console.WriteLine("Hibás");
+						break;
+				}
+			}
+		}
+		/*static void Main(string[] args)
         {
             //List<Building> buildings = new List<Building>();
             //buildings.Add(new ResidentialBuilding("Lakóház1", 5, 10));
@@ -35,6 +74,6 @@
             Building.Kiiratas();
             //BuildingManager manager = new BuildingManager();
             // manager.Menu();
-        }
-    }
+        }*/
+	}
 }
