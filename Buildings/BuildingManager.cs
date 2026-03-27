@@ -71,7 +71,7 @@
 			Console.WriteLine("-------------------------------------------");
 			int input = int.Parse(Console.ReadLine());
 
-			string name = Enum.GetName(type, input - 1);
+			string name = Enum.GetName(type, input - 1); //Program
 
 			Console.WriteLine($"Kiválasztottad a {name} épületet.");
 			Console.WriteLine("Melyik X és Y értékre szeretnéd ülteti: ");
