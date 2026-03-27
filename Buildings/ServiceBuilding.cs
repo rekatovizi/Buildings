@@ -11,6 +11,7 @@ namespace Buildings
 		public ServiceBuilding(string name, Service type,int x, int y) : base(name, x, y)
 		{
 			Type = BuildingType.Service;
+
 			BuildingCost = 15000;
 			MaintenanceCost = 1500;
 			TaxIncome = 0;
