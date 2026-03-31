@@ -1,4 +1,4 @@
-﻿namespace Buildings
+﻿namespace CitySimproj
 {
 	public abstract class Building
 	{
@@ -54,103 +54,6 @@
 			this.X = x;
 			this.Y = y;
 			this.CurrentHealth = MaxHealth;
-		}
-
-		// ==== Példa virtuális metódus ====
-		public virtual decimal CalculateNetIncome()
-		{
-			return TaxIncome - MaintenanceCost;
-		}
-
-
-		public static bool Add(Building building)
-		{
-			// Ha már van ugyanazon a koordinátán épület → nem adjuk hozzá
-			foreach (var b in buildings)
-			{
-				if (b.X == building.X && b.Y == building.Y)
-				{
-					return false;
-				}
-			}
-
-			buildings.Add(building);
-			return true;
-		}
-
-		// ==== Remove metódus ====
-		public static bool Remove(Building building)
-		{
-			if (building == null)
-				return false;
-
-			for (int i = 0; i < buildings.Count; i++)
-			{
-				if (buildings[i].X == building.X && buildings[i].Y == building.Y)
-				{
-					buildings.RemoveAt(i);
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		public static void Draw()
-		{
-			// Meghatározzuk a pálya méretét
-			int maxX = 0;
-			int maxY = 0;
-
-			for (int i = 0; i < buildings.Count; i++)
-			{
-				if (buildings[i].X > maxX)
-					maxX = buildings[i].X;
-
-				if (buildings[i].Y > maxY)
-					maxY = buildings[i].Y;
-			}
-
-			// Mátrix létrehozása
-			Building[,] matrix = new Building[maxX + 1, maxY + 1];
-
-			// Feltöltés
-			for (int i = 0; i < buildings.Count; i++)
-			{
-				Building b = buildings[i];
-				matrix[b.X, b.Y] = b;
-			}
-
-			// Kirajzolás
-			for (int y = 1; y <= maxY + 1; y++)
-			{
-
-				for (int x = 1; x <= maxX + 1; x++)
-				{
-					if (matrix[x - 1, y - 1] != null)
-					{
-						Console.Write($"|{"Ház ",10}|");
-					}
-					else
-					{
-						Console.Write($"{"  ",10}");
-					}
-				}
-				Console.WriteLine();
-				for (int x = 1; x <= maxX + 1; x++)
-				{
-					Console.Write($"{"--------",10}");
-				}
-			}
-			Console.WriteLine();
-		}
-
-		public static void Kiiratas()
-		{
-			for (int i = 0; i < buildings.Count; i++)
-			{
-				Console.WriteLine(buildings[i].name);
-			}
 		}
 	}
 }
